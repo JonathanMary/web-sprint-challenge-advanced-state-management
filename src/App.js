@@ -18,7 +18,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {console.log("App, Inside Render: ", this.props)}
         <Header />
         <main>
           <SmurfList/>
@@ -30,7 +29,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("App.js state: ", state);
+  //console.log("App.js state: ", state);
   return {
     smurfs: state.smurfs,
     isLoading: state.isLoading,

@@ -1,4 +1,4 @@
-import { FETCH_START, FETCH_API_SUCCESS, FETCH_API_FAIL, ADD_SMURF, ERROR_MESSAGE } from '../actions';
+import { FETCH_START, FETCH_API_SUCCESS, FETCH_API_FAIL, ADD_SMURF, SET_ERROR } from '../actions';
 
 
 export const initialState = {
@@ -23,11 +23,24 @@ const reducer = (state = initialState, action)=>{
                 isLoading: false,
             });
         case(FETCH_API_FAIL):
-            return state;
+            return ({
+                ...state,
+                error: action.payload,
+                isLoading: false,
+            });
         case(ADD_SMURF):
-            return state;
-        case(ERROR_MESSAGE):
-            return state;
+            return ({
+                ...state,
+                smurfs: [
+                    ...state.smurfs,
+                    action.payload,
+                ]
+            });
+        case(SET_ERROR):
+            return ({
+                ...state,
+                errorMessage: action.payload,
+            });
         default:
             return state;
     }

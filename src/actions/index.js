@@ -4,7 +4,7 @@ export const FETCH_START = "FETCH_SMURF";
 export const FETCH_API_SUCCESS = "FETCH_API_SUCCESS";
 export const FETCH_API_FAIL = "FETCH_API_FAIL";
 export const ADD_SMURF = "ADD_SMURF";
-export const ERROR_MESSAGE = "ERROR_MESSAGE";
+export const SET_ERROR = "SET_ERROR";
 
 
 //Task List:
@@ -19,10 +19,11 @@ export const fetchSmurfs = () => {
         //axios call
         axios.get("http://localhost:3333/smurfs")
              .then(res => {
-                console.log(res.data)
                 dispatch(fetchApiSuccess(res.data))
-             })
-             .catch(err => dispatch(fetchApiFail(err)))
+                })
+             .catch(err => {
+                 dispatch(fetchApiFail(err.message))
+                })
     }
 }
 
@@ -36,9 +37,9 @@ export const fetchApiSuccess = (smurfs) => {
 export const fetchApiFail = (error) => {
     return({type: FETCH_API_FAIL, payload: error});
 };
-export const addSmurf = () => {
-    return({type: ADD_SMURF});
+export const addSmurf = (smurf) => {
+    return({type: ADD_SMURF, payload: smurf});
 };
-export const errorMessage = () => {
-    return({type: ERROR_MESSAGE});
+export const setError = (error) => {
+    return({type: SET_ERROR, payload: error});
 };
